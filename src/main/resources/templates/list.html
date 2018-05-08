@@ -31,7 +31,7 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/list.html">사용자 목록</a></li>
+					<li><a href="/list">사용자 목록</a></li>
 					<li><a href="/form.html">회원가입</a></li>
 				</ul>
 			</div>
@@ -40,29 +40,23 @@
 		<!-- /.container-fluid -->
 	</nav>
 
-
 	<div class="container">
-		<form action="/create" method="post">
-			<div class="form-group">
-				<label for="userId">ID</label> <input type="text"
-					class="form-control" name="userId" placeholder="Uesr ID">
-			</div>
-			<div class="form-group">
-				<label for="password">Password</label> <input type="password"
-					class="form-control" name="password" placeholder="Password">
-			</div>
-			<div class="form-group">
-				<label for="userName">Name</label> <input type="text"
-					class="form-control" name="userName" placeholder="Uesr Name">
-			</div>
-			<div class="form-group">
-				<label for="userEmail">Email</label> <input type="email"
-					class="form-control" name="userEmail" placeholder="Email">
-			</div>
-
-			<button type="submit" class="btn btn-default">Submit</button>
-		</form>
-
+		<h3>사용자 목록</h3>
+		<table class="table table-stripe">
+			<tr>
+				<th>아이디</th>
+				<th>이름</th>
+				<th>이메일</th>
+			</tr>
+			
+			{{#users}}
+			<tr>
+				<td>{{userId}}</td>
+				<td>{{userName}}</td>
+				<td>{{userEmail}}</td>
+			</tr>
+			{{/users}}
+		</table>
 	</div>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
