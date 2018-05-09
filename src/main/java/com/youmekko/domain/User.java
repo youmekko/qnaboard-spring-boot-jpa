@@ -1,8 +1,28 @@
-package com.youmekko.web;
+package com.youmekko.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class User {
 
-	String userId, password, userName, userEmail;
+	@Id
+	@GeneratedValue
+	private Long id;
+
+	@Column(nullable = false, length=20)
+	private String userId;
+	
+	@Column(nullable = false, length=20)
+	private String password;
+	
+	@Column(nullable = false, length=20)
+	private String userName;
+	
+	@Column(nullable = false, length=20)
+	private String userEmail;
 
 	public void setUserId(String userId) {
 		this.userId = userId;
