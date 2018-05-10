@@ -19,6 +19,25 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 
+	@GetMapping("/loginForm")
+	public String loginForm() {
+		return "/user/login";
+	}
+
+	@PostMapping("/login")
+	public String login(Long id, String userId, String password) {
+		User user = userRepository.findByUserId(userId);
+		if (user == null) {
+			return "redirect:/users/loginForm";
+		}
+
+		if (!password.equals(user.getPassword())) {
+			return "redirect:/users/loginForm";
+		}
+
+		return "redirect:/";
+	}
+
 	@GetMapping("/form")
 	public String form() {
 		return "/user/form";
@@ -37,7 +56,7 @@ public class UserController {
 		model.addAttribute("user", user);
 		return "/user/updateForm";
 	}
-	
+
 	@GetMapping("")
 	public String list(Model model) {
 		model.addAttribute("users", userRepository.findAll());
