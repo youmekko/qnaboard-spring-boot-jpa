@@ -98,7 +98,7 @@ public class UserController {
 		if (!loginedUser.matchId(id)) {
 			throw new IllegalStateException("you can olny update your infomation!");
 		}
-
+ 
 		User user = userRepository.findById(id).get();
 		user.update(updateUser);
 		userRepository.save(user);
