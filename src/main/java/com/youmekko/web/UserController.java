@@ -40,14 +40,14 @@ public class UserController {
 		}
 
 		System.out.println("LOGIN SUCCESS!");
-		session.setAttribute("user", user);
+		session.setAttribute("loginedUser", user);
 
 		return "redirect:/";
 	}
 
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
-		session.removeAttribute("user");
+		session.removeAttribute("loginedUser");
 		return "redirect:/";
 	}
 
@@ -64,9 +64,21 @@ public class UserController {
 	}
 
 	@GetMapping("/{id}/form")
-	public String updateForm(@PathVariable Long id, Model model) {
-		User user = userRepository.findById(id).get();
+	public String updateForm(@PathVariable Long id, Model model, HttpSession session) {
+		Object tempUser = session.getAttribute("loginedUser");
+
+		if (tempUser == null) {
+			return "redirect:/users/form";
+		}
+
+		User loginedUser = (User) tempUser;
+		// if(!id.equals(loginedUser.getId())) {
+		// throw new IllegalStateException("you can olny modify your infomation!");
+		// }
+
+		User user = userRepository.findById(loginedUser.getId()).get();
 		model.addAttribute("user", user);
+
 		return "/user/updateForm";
 	}
 
@@ -77,7 +89,19 @@ public class UserController {
 	}
 
 	@PutMapping("/{id}")
-	public String update(@PathVariable Long id, User updateUser) {
+	public String update(@PathVariable Long id, User updateUser, HttpSession session) {
+
+		Object tempUser = session.getAttribute("loginedUser");
+
+		if (tempUser == null) {
+			return "redirect:/users/form";
+		}
+
+		User loginedUser = (User) tempUser;
+		 if(!id.equals(loginedUser.getId())) {
+		 throw new IllegalStateException("you can olny update your infomation!");
+		 }
+
 		User user = userRepository.findById(id).get();
 		user.update(updateUser);
 		userRepository.save(user);
