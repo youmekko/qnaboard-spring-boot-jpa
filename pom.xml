@@ -7,7 +7,9 @@
 	<groupId>com.youmekko</groupId>
 	<artifactId>qnaBoard</artifactId>
 	<version>1.0</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
+
+
 
 	<name>qnaBoard</name>
 	<description>qnaBoard (Srping-Boot, JPA)</description>
@@ -36,6 +38,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency> 
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
