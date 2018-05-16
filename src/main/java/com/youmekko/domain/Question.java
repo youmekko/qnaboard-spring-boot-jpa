@@ -2,13 +2,17 @@ package com.youmekko.domain;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 @Entity
 public class Question {
@@ -23,9 +27,16 @@ public class Question {
 
 	private String title;
 
+	@Lob
 	private String contents;
 
 	private LocalDateTime createDate;
+	
+	
+	@OneToMany(mappedBy="question")
+	@OrderBy("id ASC")
+	private List<Comment> comments;
+	
 
 	public Question() {
 	}
@@ -44,6 +55,11 @@ public class Question {
 		}
 		return createDate.format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"));
 	}
+	
+	public int getCommentsSize() {
+		return this.comments.size();
+	}
+
 
 	public void update(String title, String contents) {
 		this.title = title;
@@ -53,6 +69,5 @@ public class Question {
 	public boolean isSameWriter(User loginedUser) {
 		return this.writer.equals(loginedUser);
 	}
-
 
 }
