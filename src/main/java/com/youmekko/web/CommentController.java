@@ -27,7 +27,7 @@ public class CommentController {
 	@PostMapping("")
 	public String create(@PathVariable Long questionId, String contents, HttpSession session) {
 		if (!HttpSessionUtils.isLoginUser(session)) {
-			return "redirect:/users/loginForm";
+			return "/user/login";
 		}
 
 		User loginedUser = HttpSessionUtils.getUserFromSession(session);
