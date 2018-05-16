@@ -50,4 +50,9 @@ public class Question {
 		this.contents = contents;
 	}
 
+	public boolean isSameWriter(User loginedUser) {
+		return this.writer.equals(loginedUser);
+	}
+
+
 }
