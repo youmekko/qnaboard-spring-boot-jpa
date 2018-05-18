@@ -14,29 +14,33 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 public class Question {
 
 	@Id
 	@GeneratedValue
+	@JsonProperty
 	private Long id;
 
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_question_writer"))
+	@JsonProperty
 	private User writer;
 
+	@JsonProperty
 	private String title;
 
 	@Lob
+	@JsonProperty
 	private String contents;
 
 	private LocalDateTime createDate;
-	
-	
-	@OneToMany(mappedBy="question")
-	@OrderBy("id ASC")
+
+	@OneToMany(mappedBy = "question")
+	@OrderBy("id DESC")
 	private List<Comment> comments;
-	
 
 	public Question() {
 	}
@@ -55,11 +59,10 @@ public class Question {
 		}
 		return createDate.format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"));
 	}
-	
+
 	public int getCommentsSize() {
 		return this.comments.size();
 	}
-
 
 	public void update(String title, String contents) {
 		this.title = title;

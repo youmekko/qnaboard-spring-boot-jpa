@@ -5,23 +5,31 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 public class User {
 
 	@Id
 	@GeneratedValue
+	@JsonProperty
 	private Long id;
 
 	@Column(nullable = false, length = 20, unique = true)
+	@JsonProperty
 	private String userId;
 
 	@Column(nullable = false, length = 20)
+	@JsonIgnore
 	private String password;
 
 	@Column(nullable = false, length = 20)
+	@JsonProperty
 	private String userName;
 
 	@Column(nullable = false, length = 20)
+	@JsonProperty
 	private String userEmail;
 
 	public boolean matchId(Long inputId) {
@@ -108,8 +116,5 @@ public class User {
 			return false;
 		return true;
 	}
-	
-	
-	
 
 }
