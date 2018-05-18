@@ -106,7 +106,8 @@ public class QuestionController {
 		}
 
 		User loginedUser = HttpSessionUtils.getUserFromSession(session);
-		if (!question.equals(loginedUser)) {
+		
+		if (!question.isSameWriter(loginedUser)) {
 			return Result.fail("자신이 쓴 글만 수정/삭제가 가능합니다.");
 		}
 
