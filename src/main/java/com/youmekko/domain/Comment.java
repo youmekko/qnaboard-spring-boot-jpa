@@ -54,6 +54,10 @@ public class Comment {
 		return createDate.format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"));
 	}
 	
+	public boolean isSameWriter(User loginedUser) {
+		return loginedUser.equals(this.writer);
+	}
+	
 	
 	@Override
 	public int hashCode() {
