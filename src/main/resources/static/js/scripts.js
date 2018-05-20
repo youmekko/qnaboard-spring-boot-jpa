@@ -28,8 +28,7 @@ function onSuccess(data, status){
 	console.log(data);
 	var commentTemplate = $("#answerTemplate").html();
 	var template = commentTemplate.format(data.writer.userId, data.formatterCreateDate
-, data.contents, data.id, data.id)
-
+, data.contents, data.question.id, data.id);
    $(".qna-comment-slipp-articles").prepend(template);
 	
    $(".comment-write textarea").val("");
@@ -37,26 +36,26 @@ function onSuccess(data, status){
 
 
 
-$(".link-delete-article").click(deleteComment);
+$("a.link-delete-article").click(deleteComment);
 
 function deleteComment(e){
 	e.preventDefault();
 	
 	var deleteBtn = $(this);
 	var url = deleteBtn.attr("href");
-	console.log(url);
+	console.log("url : " + url);
 	
 	$.ajax({
 		type : 'delete',
-		url : url,
-		dataType = 'json',
+		url : url, 
+		dataType : 'json',
 		error : function(xhr, status){
-			console.log("error");
+			console.log("error"); 
 		},
 		success : function(data, status){
 			console.log(data);
 			if(data.valid){
-				$deleteBtn.closest("article").remove();
+				deleteBtn.closest("article").remove();
 			} else{
 				alert(data.errorMessage);
 			}

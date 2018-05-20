@@ -33,7 +33,7 @@
 									href="/questions/{{id}}/form">수정</a></li>
 								<li>
 									<form class="form-delete" action="/questions/{{id}}"
-										method="POST">
+										method="post">
 										<input type="hidden" name="_method" value="delete">
 										<button class="link-delete-article" type="submit">삭제</button>
 									</form>
@@ -48,7 +48,7 @@
 					<div class="qna-comment">
 						<div class="qna-comment-slipp">
 							<p class="qna-comment-count">
-								<strong>{{commentsSize}}</strong>개의 의견
+								<strong>{{countOfcomment}}</strong>개의 의견
 							</p>
 							<div class="qna-comment-slipp-articles">
 								{{#comments}}
@@ -72,7 +72,7 @@
 											<li><a class="link-modify-article"
 												href="/questions/413/answers/1405/form">수정</a></li>
 											<li><a class="link-delete-article"
-												href="/api/questions/{question.id}/comments//{{id}}">삭제</a></li>
+												href="/api/questions/{{question.id}}/comments/{{id}}">삭제</a></li>
 										</ul>
 									</div>
 								</article>
@@ -116,7 +116,7 @@
 			<li>
 				<a class="link-modify-article" href="/api/qna/updateAnswer/{3}">수정</a>
 			</li>
-			<li>
+			<li>                                     
 				<a class="link-delete-article" href="/api/questions/{3}/comments/{4}">삭제</a>
 			</li>
 		</ul>

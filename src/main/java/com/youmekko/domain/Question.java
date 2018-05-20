@@ -36,6 +36,9 @@ public class Question {
 	@JsonProperty
 	private String contents;
 
+	@JsonProperty
+	private Integer countOfcomment = 0;
+
 	private LocalDateTime createDate;
 
 	@OneToMany(mappedBy = "question")
@@ -60,9 +63,6 @@ public class Question {
 		return createDate.format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"));
 	}
 
-	public int getCommentsSize() {
-		return this.comments.size();
-	}
 
 	public void update(String title, String contents) {
 		this.title = title;
@@ -71,6 +71,14 @@ public class Question {
 
 	public boolean isSameWriter(User loginedUser) {
 		return this.writer.equals(loginedUser);
+	}
+
+	public void addComment() {
+		this.countOfcomment += 1;
+	}
+
+	public void deleteComment() {
+		this.countOfcomment -= 1;
 	}
 
 }
